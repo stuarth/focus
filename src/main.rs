@@ -1,3 +1,5 @@
+extern crate dirs;
+
 mod util {
     use std::fs::File;
     use std::io::Read;
@@ -11,6 +13,7 @@ mod util {
 }
 
 mod focus {
+    use dirs;
     use std::fs::OpenOptions;
     use std::io::Write;
 
@@ -26,7 +29,7 @@ mod focus {
     }
 
     pub fn enable() {
-        let sites_path = ::std::env::home_dir()
+        let sites_path = dirs::home_dir()
             .map(|mut h| {
                 h.push(".focus");
                 h
