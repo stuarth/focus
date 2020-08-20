@@ -33,7 +33,8 @@ mod focus {
             .map(|mut h| {
                 h.push(".focus");
                 h
-            }).expect("no home folder?");
+            })
+            .expect("no home folder?");
 
         let sites = util::slurp(&sites_path).expect("could not read ~/.focus");
 
@@ -82,6 +83,13 @@ fn main() {
         Some("disable") => {
             println!("SLACKER!");
             focus::disable();
+        }
+        Some("break") => {
+            println!("You have 5 minutes, slacker!");
+            focus::disable();
+            std::thread::sleep(std::time::Duration::from_secs(60 * 5));
+            println!("BACK TO WORK!");
+            focus::enable();
         }
         Some(unknown) => {
             println!("don't know '{}'", unknown);
