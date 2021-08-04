@@ -1,6 +1,6 @@
 # Maximum Effort!
 
-Focus is a simple tool to twiddle your /etc/host file in order to remap distracting domains.
+Focus is a simple tool to twiddle your `/etc/host` file in order to remap distracting domains.
 
 ## Installation
 
@@ -16,3 +16,5 @@ When run, focus will look for a `~/.focus` file containing a list of domains, e.
 foo.com
 bar.biz
 ```
+
+Run it without arguments and it will toggle its behavior, or `focus enable` / `focus disable` to specify.
