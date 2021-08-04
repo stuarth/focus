@@ -19,8 +19,8 @@ mod focus {
 
     use util;
 
-    const PATH: &'static str = "/etc/hosts";
-    const HEADER: &'static str = "FOCUS";
+    const PATH: &str = "/etc/hosts";
+    const HEADER: &str = "FOCUS";
 
     pub fn enabled() -> bool {
         util::slurp(PATH)
@@ -42,15 +42,17 @@ mod focus {
             .append(true)
             .open(PATH)
             .expect("error opening");
-        f.write("\n# FOCUS\n".as_bytes()).expect("error writing");
+        f.write_all("\n# FOCUS\n".as_bytes())
+            .expect("error writing");
 
         for domain in sites.lines() {
-            f.write(format!("127.0.0.1  {}\n", domain).as_bytes())
+            f.write_all(format!("127.0.0.1  {}\n", domain).as_bytes())
                 .expect("error writing");
-            f.write(format!("127.0.0.1  www.{}\n", domain).as_bytes())
+            f.write_all(format!("127.0.0.1  www.{}\n", domain).as_bytes())
                 .expect("error writing");
         }
-        f.write("# END FOCUS\n".as_bytes()).expect("error writing");
+        f.write_all("# END FOCUS\n".as_bytes())
+            .expect("error writing");
     }
 
     pub fn disable() {
@@ -67,7 +69,7 @@ mod focus {
             .open("/etc/hosts")
             .expect("error opening -- did you run as sudo?");
 
-        f.write(content.as_bytes()).expect("error writing");
+        f.write_all(content.as_bytes()).expect("error writing");
     }
 }
 
